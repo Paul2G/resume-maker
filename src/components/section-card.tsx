@@ -1,9 +1,13 @@
-import {useState} from "react";
+import { useState } from "react";
 
-import {Button} from "@/components/ui/button";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible";
-import {ChevronDown, ChevronUp} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export function SectionCard({ title, children }: SectionCardProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +24,7 @@ export function SectionCard({ title, children }: SectionCardProps) {
             {title}
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="icon" className="size-8">
-                  {
-                    isOpen ? <ChevronUp/> : <ChevronDown />
-                  }
+                {isOpen ? <ChevronUp /> : <ChevronDown />}
                 <span className="sr-only">Toggle</span>
               </Button>
             </CollapsibleTrigger>
