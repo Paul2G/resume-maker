@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Header } from "@/components/header";
+import { SectionCard } from "@/components/section-card";
+
+import { ThemeProvider } from "./context/theme-provider";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider>
+      <div className="flex flex-col relative  min-h-screen bg-background text-foreground">
+        <Header />
+        <main className="grow px-1 flex items-stretch divide-x py-2">
+          <div className="flex-2">
+            <div
+              id="resume"
+              className="bg-white text-black max-w-full w-[50rem] aspect-[17/22] mx-auto shadow-md border"
+            >
+              A
+            </div>
+          </div>
+          <div className="flex-1 flex flex-col gap-4 p-4">
+            <SectionCard title="Contact info">Hola</SectionCard>
+            <SectionCard title="Experience">Inputs</SectionCard>
+          </div>
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
