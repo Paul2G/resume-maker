@@ -7,7 +7,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils.ts";
 
 export function SectionCard({ title, children }: SectionCardProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,9 @@ export function SectionCard({ title, children }: SectionCardProps) {
             {title}
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="icon" className="size-8">
-                {isOpen ? <ChevronUp /> : <ChevronDown />}
+                <ChevronDown
+                  className={cn(isOpen && "rotate-180", "duration-300")}
+                />
                 <span className="sr-only">Toggle</span>
               </Button>
             </CollapsibleTrigger>

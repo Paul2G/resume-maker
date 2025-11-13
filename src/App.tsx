@@ -2,6 +2,7 @@ import { Header } from "@/components/header";
 import { SectionCard } from "@/components/section-card";
 
 import { ThemeProvider } from "./context/theme-provider";
+import { ContactInfoForm } from "@/components/forms/contact-info-form.tsx";
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-4 p-4">
-            <SectionCard title="Contact info">Hola</SectionCard>
+            <SectionCard title="Contact info">
+              <ContactInfoForm />
+            </SectionCard>
             <SectionCard title="Experience">Inputs</SectionCard>
           </div>
         </main>
