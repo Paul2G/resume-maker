@@ -1,3 +1,6 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
@@ -6,41 +9,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button.tsx";
-import { phoneNumberPattern } from "@/lib/regex.ts";
+import { Button } from "@/components/ui/button";
+
+import { contactInfoSchema } from "@/lib/schemas";
+import type { ContactInfo } from "@/lib/types";
+
+import { useResume } from "@/hooks/use-resume";
 
 export function ContactInfoForm() {
-  const formSchema = z.object({
-    fullName: z.string().min(1),
-    emailAddress: z.email().optional(),
-    phoneNumber: z
-      .string()
-      .regex(phoneNumberPattern, { message: "Invalid phone number" })
-      .optional(),
-    address: z.string().optional(),
-    linkedinUrL: z.url().optional(),
-    website: z.url().optional(),
-  });
+  const { contactInfo, setContactInfo } = useResume()!;
 
   const form = useForm({
-    defaultValues: {
-      fullName: "",
-      emailAddress: "",
-      phoneNumber: "",
-      address: "",
-      linkedinUrL: "",
-      website: "",
-    },
-    resolver: zodResolver(formSchema),
+    defaultValues: contactInfo,
+    resolver: zodResolver(contactInfoSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: ContactInfo) {
     console.log(values);
+    setContactInfo(values);
   }
 
   return (

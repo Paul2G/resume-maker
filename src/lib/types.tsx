@@ -17,15 +17,15 @@ export type AppData = {
 export type Resume = {
   id: string;
   title: string;
-  summary: string;
-  sectionsOrder: Set<SectionType>;
+  summary?: string;
+  sectionsOrder: Array<SectionType>;
   contactInfo: ContactInfo;
   experience: ExperienceItem[];
   education: EducationItem[];
   projects: Project[];
   certifications: Certification[];
   courses: Course[];
-  skills: string;
+  skills?: string;
 };
 
 export type ContactInfo = z.infer<typeof contactInfoSchema>;
