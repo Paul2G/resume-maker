@@ -9,7 +9,7 @@ export const contactInfoSchema = z.object({
     .regex(phoneNumberPattern, { message: "Invalid phone number" })
     .optional(),
   address: z.string().optional(),
-  linkedinUrL: z.url().optional(),
+  linkedin: z.string().optional(),
   website: z.url().optional(),
 });
 

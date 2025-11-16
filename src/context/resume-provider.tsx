@@ -19,6 +19,13 @@ export function ResumeProvider({
     }));
   }
 
+  function setSummary(summary: Resume["summary"]) {
+    setResume((prev) => ({
+      ...prev,
+      summary,
+    }));
+  }
+
   useUpdateEffect(() => {
     setResume(currentResume);
   }, [currentResume]);
@@ -28,7 +35,7 @@ export function ResumeProvider({
   }, [resume]);
 
   return (
-    <ResumeContext.Provider value={{ ...resume, setContactInfo }}>
+    <ResumeContext.Provider value={{ ...resume, setContactInfo, setSummary }}>
       {children}
     </ResumeContext.Provider>
   );
@@ -42,4 +49,5 @@ export type ResumeProviderProps = {
 
 export type ResumeProviderValue = Resume & {
   setContactInfo: (contactInfo: Resume["contactInfo"]) => void;
+  setSummary: (summary: Resume["summary"]) => void;
 };

@@ -16,9 +16,15 @@ import { contactInfoSchema } from "@/lib/schemas";
 import type { ContactInfo } from "@/lib/types";
 
 import { useResume } from "@/hooks/use-resume";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 
 export function ContactInfoForm() {
-  const { contactInfo, setContactInfo } = useResume()!;
+  const { contactInfo, setContactInfo } = useResume();
 
   const form = useForm({
     defaultValues: contactInfo,
@@ -80,7 +86,7 @@ export function ContactInfoForm() {
               <FormLabel>Address</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Av. Insurgentes Sur 1000, Colonia Del Valle, Benito Juárez, 03100 Ciudad de México, CDMX, México"
+                  placeholder="Tijuana, Baja California, México"
                   {...field}
                 />
               </FormControl>
@@ -90,15 +96,21 @@ export function ContactInfoForm() {
         />
         <FormField
           control={form.control}
-          name="linkedinUrL"
+          name="linkedin"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Linkedin URL</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="https://linkedin.com/in/Paul2G"
-                  {...field}
-                />
+                <InputGroup>
+                  <InputGroupAddon>
+                    <InputGroupText>https://linkedin.com/in/</InputGroupText>
+                  </InputGroupAddon>
+                  <InputGroupInput
+                    placeholder="Paul2G"
+                    className="!pl-0.5"
+                    {...field}
+                  />
+                </InputGroup>
               </FormControl>
               <FormMessage />
             </FormItem>

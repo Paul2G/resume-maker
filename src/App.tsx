@@ -7,6 +7,7 @@ import { ResumeProvider } from "@/context/resume-provider";
 
 import type { Resume } from "@/lib/types";
 import { Pages } from "@/components/pages";
+import { SummaryForm } from "@/components/forms/summary-form";
 
 const placeholderResume: Resume = {
   id: "1",
@@ -50,6 +51,9 @@ function App() {
             <div className="flex-1 flex flex-col gap-4 p-4">
               <SectionCard title="Contact info">
                 <ContactInfoForm />
+              </SectionCard>
+              <SectionCard title="Summary">
+                <SummaryForm />
               </SectionCard>
               <SectionCard title="Experience">Inputs</SectionCard>
             </div>
