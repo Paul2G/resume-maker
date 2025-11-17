@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -10,16 +11,16 @@ import {
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils.ts";
 
-export function SectionCard({ title, children }: SectionCardProps) {
+export function CollapsibleCard({
+  title,
+  children,
+  ...props
+}: SectionCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Card className="w-full py-3">
-      <Collapsible
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        className="flex flex-col gap-2"
-      >
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Card data-state={isOpen ? "open" : "closed"} {...props}>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             {title}
@@ -36,12 +37,12 @@ export function SectionCard({ title, children }: SectionCardProps) {
         <CollapsibleContent>
           <CardContent>{children}</CardContent>
         </CollapsibleContent>
-      </Collapsible>
-    </Card>
+      </Card>
+    </Collapsible>
   );
 }
 
-export type SectionCardProps = {
+export type SectionCardProps = React.ComponentProps<"div"> & {
   title: string;
   children?: React.ReactNode;
 };

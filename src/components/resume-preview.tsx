@@ -8,7 +8,7 @@ import {
 } from "@phosphor-icons/react";
 import { Separator } from "@/components/ui/separator";
 
-export function Pages() {
+export function ResumePreview() {
   const { contactInfo, summary } = useResume();
 
   return (
