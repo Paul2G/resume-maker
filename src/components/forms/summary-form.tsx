@@ -10,7 +10,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useResume } from "@/hooks/use-resume";
 import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 
 export function SummaryForm() {
   const { summary, setSummary } = useResume();
@@ -20,14 +19,14 @@ export function SummaryForm() {
     resolver: zodResolver(z.object({ summary: z.string().optional() })),
   });
 
-  function onSubmit(values: { summary?: string }) {
+  function onSave(values: { summary?: string }) {
     console.log(values);
     setSummary(values.summary);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4"}>
+      <form onChange={form.handleSubmit(onSave)} className={"space-y-4"}>
         <FormField
           control={form.control}
           name="summary"
@@ -40,8 +39,6 @@ export function SummaryForm() {
             </FormItem>
           )}
         />
-
-        <Button type="submit"> Save</Button>
       </form>
     </Form>
   );

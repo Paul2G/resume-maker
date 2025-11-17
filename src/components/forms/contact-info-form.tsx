@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 import { contactInfoSchema } from "@/lib/schemas";
 import type { ContactInfo } from "@/lib/types";
@@ -31,14 +30,14 @@ export function ContactInfoForm() {
     resolver: zodResolver(contactInfoSchema),
   });
 
-  function onSubmit(values: ContactInfo) {
+  function onSave(values: ContactInfo) {
     console.log(values);
     setContactInfo(values);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={"space-y-4"}>
+      <form onChange={form.handleSubmit(onSave)} className={"space-y-4"}>
         <FormField
           control={form.control}
           name="fullName"
@@ -129,7 +128,6 @@ export function ContactInfoForm() {
             </FormItem>
           )}
         />
-        <Button type="submit"> Save</Button>
       </form>
     </Form>
   );
