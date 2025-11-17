@@ -14,13 +14,13 @@ export const contactInfoSchema = z.object({
 });
 
 export const experienceItemSchema = z.object({
-  id: z.string(),
+  id: z.uuid(),
   jobTitle: z.string().min(1),
   companyName: z.string().min(1),
-  startDate: z.date(),
+  startDate: z.date().optional(),
   endDate: z.date().optional(),
-  isCurrentlyWorkingHere: z.boolean(),
-  jobDescription: z.string(),
+  isCurrentlyWorkingHere: z.boolean().optional(),
+  jobDescription: z.string().optional(),
 });
 
 export const educationItemSchema = z.object({

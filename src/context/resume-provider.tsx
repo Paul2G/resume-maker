@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import { useUpdateEffect } from "@/hooks/use-update-effect";
 
-import type { Resume } from "@/lib/types";
+import type { ExperienceItem, Resume } from "@/lib/types";
 
 export const ResumeContext = createContext<ResumeProviderValue>(undefined!);
 
@@ -26,6 +26,45 @@ export function ResumeProvider({
     }));
   }
 
+  function setExperience(experience: Resume["experience"]) {
+    setResume((prev) => ({
+      ...prev,
+      experience,
+    }));
+  }
+
+  function addExperienceItem() {
+    const id = crypto.randomUUID();
+
+    setResume((prev) => ({
+      ...prev,
+      experience: [
+        ...prev.experience,
+        {
+          id,
+          jobTitle: "New job",
+          companyName: "Generic company name",
+        },
+      ],
+    }));
+  }
+
+  function updateExperienceItem(experienceItem: ExperienceItem) {
+    setResume((prev) => ({
+      ...prev,
+      experience: prev.experience.map((item) =>
+        item.id === experienceItem.id ? { ...item, ...experienceItem } : item,
+      ),
+    }));
+  }
+
+  function removeExperienceItem(id: string) {
+    setResume((prev) => ({
+      ...prev,
+      experience: prev.experience.filter((item) => item.id !== id),
+    }));
+  }
+
   useUpdateEffect(() => {
     setResume(currentResume);
   }, [currentResume]);
@@ -35,7 +74,17 @@ export function ResumeProvider({
   }, [resume]);
 
   return (
-    <ResumeContext.Provider value={{ ...resume, setContactInfo, setSummary }}>
+    <ResumeContext.Provider
+      value={{
+        ...resume,
+        setContactInfo,
+        setSummary,
+        setExperience,
+        addExperienceItem,
+        updateExperienceItem,
+        removeExperienceItem,
+      }}
+    >
       {children}
     </ResumeContext.Provider>
   );
@@ -50,4 +99,8 @@ export type ResumeProviderProps = {
 export type ResumeProviderValue = Resume & {
   setContactInfo: (contactInfo: Resume["contactInfo"]) => void;
   setSummary: (summary: Resume["summary"]) => void;
+  setExperience: (experience: Resume["experience"]) => void;
+  addExperienceItem: () => void;
+  updateExperienceItem: (resume: Resume["experience"][number]) => void;
+  removeExperienceItem: (id: string) => void;
 };
